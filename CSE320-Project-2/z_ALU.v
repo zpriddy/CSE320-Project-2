@@ -20,20 +20,32 @@
 //////////////////////////////////////////////////////////////////////////////////
 module z_ALU(out, zero, a_in, b_in, shamt_in, ins_in);
 	
+	// declaring inputs
 	input [31:0] a_in, b_in, ins_in;
 	input [4:0] shamt_in;
 	
+	// declaring outputs
 	output zero;
 	output [31:0] out;
 	
+	
+	// declaring registers
 	reg [5:0] opcode, funct;
 	reg [4:0] rs, rt, rd, shamt, ins_shmat;
 	reg [31:0] out_reg, a, b, inst;
 	reg [15:0] imm;
+	reg zero_reg;
+	
+	// declaring wires
+	wire [31:0] sum;
+	
+	// inititializing Adder
+	z_n_csa AZ(sum,zero_reg,a,b,0);
 	
 	
   
 	always @(*) begin
+		// initializing registers 
 		inst = ins_in; 
 		a = a_in;
 		b = b_in;
@@ -42,69 +54,90 @@ module z_ALU(out, zero, a_in, b_in, shamt_in, ins_in);
 		rs = inst[25:21];
 		rt = inst[20:16];
 		
-		casex(opcode) //Select the regestiers to be filled
-			6'b000000:begin
+		casex(opcode) // Select the registers to be filled
+			6'b000000:begin // If R type instruction
 				rd = inst[15:11];
 				ins_shmat = inst[10:6];
 				funct = inst[5:0];
 				end
-			6'b??????:begin
+			6'b??????:begin // If I type instruction
 				imm = inst[15:0];
 				end
 		endcase
 		
 		casex(opcode)
-			6'b000000:begin
+			6'b000000:begin // If R type instruction, then opcode equals 000000
 				casex(funct)
 					6'b100001:begin
-						out_reg = a + b;
+						//addu
+						out_reg = sum;
 					end 
 					6'b100011:begin
-						out_reg = a - b;
+						//sub
+						b[31:1] = ~(b[31:1]);
+						out_reg = sum;
 					end
 					6'b101111:begin
+						//nor
 						out_reg = ~(a|b);
 					end
 					6'b000000:begin
+						//sll
 						out_reg = (a << shamt);
 					end 
 					6'b000010:begin
+						//slr
 						out_reg = (a >> shamt);
 					end
 				endcase
 			end
+			// If I type instruction, then opcode doesn't equal 000000
 			6'b001001:begin
 				//addiu
-				b = a + imm;
+				b = imm;
+				out_reg = sum;
 			end
 			6'b001100:begin
 				//andi
-				b = (a & imm);
+				out_reg = (a & imm);
 			end
 			6'b000100:begin
 				//beq
-				// WHERE DO WE GET PC FROM/TO?
-					
+				out_reg = a-b;				
 			end
 			6'b000101:begin
 				//bne
-				// WHERE DO WE GET PC FROM/TO?
+				if(a-b == 0)
+					out_reg = ~(a-b);
+				else
+					out_reg = 0;
 			end
 			6'b100011:begin
 				//lw
-				// What do we do with Mem locations?
+				b = imm;
+				out_reg = sum;
 			end
 			6'b101011:begin
 				//sw
-				// What do we do with Mem locations?
+				b = imm;
+				out_reg = sum;
 				
 			end
+		endcase
+		
+		casex(out_reg) // Set zero bit
+			8'h00000000:begin // if the out equals 0, then zero = 1
+				zero_reg = 1;
+			end
+			default:zero_reg=0; // if not, the out equals 1, then zero = 0
 		endcase
 		
 		
 	end
 	
+	// Assigns outputs
 	assign out = out_reg;
+	assign zero = zero_reg;
 
 
 endmodule

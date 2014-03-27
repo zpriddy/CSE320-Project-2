@@ -1,9 +1,6 @@
-set -tmpdir "xst/projnav.tmp"
-set -xsthdpdir "xst"
-run
--ifn z_ALU.prj
--ofn z_ALU
--ofmt NGC
+set -tmpdir "C:/Users/ayalbrai/Desktop/CSE320-Project-2-master/CSE320-Project-2-master/CSE320-Project-2/xst/projnav.tmp"
+set -xsthdpdir "C:/Users/ayalbrai/Desktop/CSE320-Project-2-master/CSE320-Project-2-master/CSE320-Project-2/xst"
+run -compileonly yes
 -p xc6slx16-3-csg324
 -top z_ALU
 -opt_mode Speed
@@ -50,3 +47,4 @@ run
 -iob Auto
 -equivalent_register_removal YES
 -slice_utilization_ratio_maxmargin 5
+-ifn z_ALU.prj
