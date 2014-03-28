@@ -18,7 +18,7 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module z_n_csa(sum,c_out,a,b,c_in);
+module z_n_csa(sum,a,b,c_in);
 	parameter k = 8;
 	parameter m = 4;
 	parameter n = k*m;
@@ -28,17 +28,15 @@ module z_n_csa(sum,c_out,a,b,c_in);
 	input c_in;
 	
 	output [n-1:0] sum;
-	output c_out;
 	
 	wire [n:0] carry;
 	wire [n-1:0] sum_w;
 	
 	assign carry[0] = c_in;
-	assign c_out = carry[n];
 
 	genvar j;
 	generate
-	for(j=0 ; j<k ; j=j+1) begin
+	for(j=0 ; j<k ; j=j+1) begin:adder_2
 		z_m_sca_stage CSAM(sum[j*m+3:j*m],carry[j*m+4],a[j*m+3:j*m],b[j*m+3:j*m],carry[j*m]);
 		defparam CSAM[j].m=m;
 	end

@@ -35,7 +35,7 @@ module z_m_sca_stage(sum,c_out,a,b,c_in);
 
 	genvar j;
 	generate
-	for(j=0 ; j<m ; j=j+1) begin
+	for(j=0 ; j<m ; j=j+1) begin:adder
 		z_csa_stage CSA(sum[j],carry[j+1],a[j],b[j],carry[j]);
 	end
 	endgenerate

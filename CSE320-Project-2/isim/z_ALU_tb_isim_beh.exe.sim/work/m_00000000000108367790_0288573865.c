@@ -10,7 +10,7 @@
 /*  \___\/\___\                                                    */
 /***********************************************************************/
 
-/* This file is designed for use with ISim build 0xa0883be4 */
+/* This file is designed for use with ISim build 0x7708f090 */
 
 #define XSI_HIDE_SYMBOL_SPEC true
 #include "xsi.h"
@@ -21,11 +21,11 @@
 #include <malloc.h>
 #define alloca _alloca
 #endif
-static const char *ng0 = "C:/Users/Zachary/Documents/GitHub/CSE320-Project-2/CSE320-Project-2/z_ALU_tb.v";
+static const char *ng0 = "C:/Users/ayalbrai/Desktop/CSE320-Project-2-master/CSE320-Project-2-master/CSE320-Project-2/z_ALU_tb.v";
 static unsigned int ng1[] = {263696368U, 0U};
 static unsigned int ng2[] = {2685210608U, 0U};
 static unsigned int ng3[] = {2U, 0U};
-static unsigned int ng4[] = {400619555U, 0U};
+static unsigned int ng4[] = {65075235U, 0U};
 
 
 
@@ -60,13 +60,13 @@ LAB4:    xsi_set_current_line(49, ng0);
     t2 = ((char*)((ng4)));
     t3 = (t0 + 2088);
     xsi_vlogvar_assign_value(t3, t2, 0, 0, 32);
-    xsi_set_current_line(65, ng0);
+    xsi_set_current_line(73, ng0);
     t2 = (t0 + 2816);
-    xsi_process_wait(t2, 100000000LL);
+    xsi_process_wait(t2, 100000LL);
     *((char **)t1) = &&LAB5;
 
 LAB1:    return;
-LAB5:    xsi_set_current_line(65, ng0);
+LAB5:    xsi_set_current_line(73, ng0);
     xsi_vlog_finish(1);
     goto LAB1;
 

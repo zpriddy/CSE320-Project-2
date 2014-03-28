@@ -5,16 +5,13 @@
      behavior or data corruption.  It is strongly advised that
      users do not edit the contents of this file. -->
 <messages>
-<msg type="error" file="HDLCompiler" num="1059" delta="new" >"C:\Users\ayalbrai\Desktop\CSE320-Project-2-master\CSE320-Project-2-master\CSE320-Project-2\z_ALU.v" Line 29: <arg fmt="%s" index="1">z_n_csa</arg> is an unknown type
+<msg type="warning" file="HDLCompiler" num="248" delta="old" >"C:\Users\ayalbrai\Desktop\CSE320-Project-2-master\CSE320-Project-2-master\CSE320-Project-2\z_m_sca_stage.v" Line 38: Block identifier is required on this block
 </msg>
 
-<msg type="error" file="HDLCompiler" num="58" delta="new" >"C:\Users\ayalbrai\Desktop\CSE320-Project-2-master\CSE320-Project-2-master\CSE320-Project-2\z_ALU.v" Line 64: <arg fmt="%s" index="1">ZA</arg> is not a task
+<msg type="warning" file="HDLCompiler" num="248" delta="old" >"C:\Users\ayalbrai\Desktop\CSE320-Project-2-master\CSE320-Project-2-master\CSE320-Project-2\z_n_csa.v" Line 41: Block identifier is required on this block
 </msg>
 
-<msg type="error" file="HDLCompiler" num="24" delta="new" >"C:\Users\ayalbrai\Desktop\CSE320-Project-2-master\CSE320-Project-2-master\CSE320-Project-2\z_ALU.v" Line 64: <arg fmt="%s" index="1">ZA</arg> expects <arg fmt="%d" index="2">0</arg> arguments
-</msg>
-
-<msg type="error" file="HDLCompiler" num="598" delta="new" >"C:\Users\ayalbrai\Desktop\CSE320-Project-2-master\CSE320-Project-2-master\CSE320-Project-2\z_ALU.v" Line 21: Module &lt;<arg fmt="%s" index="1">z_ALU</arg>&gt; ignored due to previous errors.
+<msg type="error" file="HDLCompiler" num="329" delta="old" >"C:\Users\ayalbrai\Desktop\CSE320-Project-2-master\CSE320-Project-2-master\CSE320-Project-2\z_ALU.v" Line 44: Target &lt;<arg fmt="%s" index="1">zero_reg</arg>&gt; of concurrent assignment or output port connection should be a net type.
 </msg>
 
 </messages>

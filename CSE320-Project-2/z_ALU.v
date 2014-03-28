@@ -35,12 +35,13 @@ module z_ALU(out, zero, a_in, b_in, shamt_in, ins_in);
 	reg [31:0] out_reg, a, b, inst;
 	reg [15:0] imm;
 	reg zero_reg;
+
 	
 	// declaring wires
 	wire [31:0] sum;
 	
 	// inititializing Adder
-	z_n_csa AZ(sum,zero_reg,a,b,0);
+	z_n_csa AZ(sum,a,b,1'b0);
 	
 	
   
@@ -67,15 +68,14 @@ module z_ALU(out, zero, a_in, b_in, shamt_in, ins_in);
 		
 		casex(opcode)
 			6'b000000:begin // If R type instruction, then opcode equals 000000
-				casex(funct)
+				casex(funct) // Choose the function depending on the funct bits
 					6'b100001:begin
 						//addu
 						out_reg = sum;
 					end 
 					6'b100011:begin
 						//sub
-						b[31:1] = ~(b[31:1]);
-						out_reg = sum;
+					out_reg = a-b;
 					end
 					6'b101111:begin
 						//nor
@@ -92,6 +92,7 @@ module z_ALU(out, zero, a_in, b_in, shamt_in, ins_in);
 				endcase
 			end
 			// If I type instruction, then opcode doesn't equal 000000
+			// Choose the function depending on the opcode bits
 			6'b001001:begin
 				//addiu
 				b = imm;
